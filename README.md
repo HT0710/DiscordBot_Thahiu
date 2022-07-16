@@ -1,8 +1,8 @@
 # DiscordBot_Thahiu
 
-- Multi-feature
-- Music bot
-- ;help
+- First
+- Testing
+- Rudimentary
 
 ## Invite link
 
