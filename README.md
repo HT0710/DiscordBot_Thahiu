@@ -1,6 +1,8 @@
 # DiscordBot_Thahiu
+- Thahíu
+<img src="logo.png" width="100" height="100"/>
 
-- First
+- First bot
 - Testing
 - Rudimentary
 
