@@ -1,1 +1,6 @@
 discord
+requests
+music
+tinydb
+asyncio
+youtube_dl
