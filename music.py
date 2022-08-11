@@ -1,6 +1,5 @@
 import asyncio
 import youtube_dl
-import pafy
 import discord
 from discord.ext import commands
 

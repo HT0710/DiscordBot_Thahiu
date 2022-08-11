@@ -1,27 +1,30 @@
+import os
 import discord
-import nacl
 from discord.ext import commands
-from TOKEN import TOKEN
 from def_list import *
 from my_list import *
 from music import Player
-from websever import keep_alive
 from tinydb import TinyDB, Query
 
-client = commands.Bot(command_prefix='.', intents=discord.Intents.all(), help_command=None)
+client = commands.Bot(command_prefix='.',
+                      intents=discord.Intents.all(), help_command=None)
 
 db = TinyDB('db.json')
 User = Query()
 
 # <editor-fold desc="client event">
+
+
 @client.event
 async def on_ready():
     print('{0.user} vừa du hành vào sever'.format(client))
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='Đời | .help'))
 
+
 @client.event
 async def on_member_join(member):
     print(f'{member} vừa du hành vào sever')
+
 
 @client.event
 async def on_member_out(member):
@@ -53,7 +56,7 @@ async def help(ctx, sub=None):
 
 # <editor-fold desc="activity">
 @client.command(name='activity')
-async def activities(ctx, name='free', *,sub='...'):
+async def activities(ctx, name='free', *, sub='...'):
     x = f'{sub} | .help'
     if name == 'free':
         await client.change_presence(activity=discord.Activity(type=discord.ActivityType.unknown))
@@ -177,6 +180,7 @@ async def avatar(ctx, *, avamember: discord.Member = None):
         await ctx.send(ctx.author.avatar_url)
 # </editor-fold>
 
+
 @client.command()
 async def isert(ctx, *, sentence):
     s = sentence.split('/')[0].lower()
@@ -186,6 +190,7 @@ async def isert(ctx, *, sentence):
         await ctx.send('Đã thêm thành công')
     except:
         await ctx.send('.isert a/b')
+
 
 @client.command()
 async def rmove(ctx, *, sentence):
@@ -199,13 +204,14 @@ async def rmove(ctx, *, sentence):
     except:
         await ctx.send('.rmove a/b hoặc câu không tồn tại')
 
+
 @client.command()
 async def lall(ctx):
     embed = discord.Embed(title='Danh sách', colour=ctx.author.colour)
     for item in db:
         embed.add_field(name='\u200b', value=f'`{item["s"]}`: {item["d"]}')
     await ctx.send(embed=embed)
-    
+
 # </editor-fold>
 
 
@@ -292,9 +298,6 @@ async def on_message(message):
         return
 
 
-
-
 client.add_cog(Player(client))
-keep_alive()
-client.run(TOKEN)
+client.run(os.environ['TOKEN'])
 # https://discord.com/api/oauth2/authorize?client_id=911855562361278565&permissions=8&scope=bot
